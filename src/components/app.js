@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchWeather} from '../actions/index';
 
-export default class App extends Component {
+
+export class App extends Component {
+
+  constructor(props){
+    super(props);
+
+    this.state = {city:'Choose a city to view the weather'};
+    this.handleClick = this.handleClick.bind(this);
+    this.handleCityChange = this.handleCityChange.bind(this);
+  }
+
   render() {
     return (
       <div>
@@ -13,14 +26,16 @@ export default class App extends Component {
               </button>
               <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                  <a className="nav-item nav-link active" href="#">თბილისი </a>
-                  <a className="nav-item nav-link" href="#">ქუთაისი</a>
-                  <a className="nav-item nav-link" href="#">ბათუმი</a>
-                  <a className="nav-item nav-link" href="#">ზუგდიდი</a>
+                  <a className="nav-item nav-link" href="#" onClick={this.handleClick} >Tbilisi</a>
+                  <a className="nav-item nav-link" href="#" onClick={this.handleClick} >Kutaisi</a>
+                  <a className="nav-item nav-link" href="#" onClick={this.handleClick} >Batumi</a>
+                  <a className="nav-item nav-link" href="#" onClick={this.handleClick} >Zugdidi</a>
                 </div>
               </div>
             </nav>
-            <div className="container" >React simple starter</div>
+            <div className="container" >
+              <h1 className="display-4" onClick={this.handleCityChange} > {this.state.city} </h1>
+            </div>
             </div>
             
 
@@ -29,4 +44,19 @@ export default class App extends Component {
       
     );
   }
+
+  handleClick(event){
+    this.setState({city: event.target.textContent});
+  }
+
+  handleCityChange(event){
+    this.props.fetchWeather(this.state.city);
+  }
+  
 }
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({fetchWeather}, dispatch);
+}
+
+export default connect(null,mapDispatchToProps)(App);
