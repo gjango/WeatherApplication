@@ -11,9 +11,9 @@ export class App extends Component {
 
     this.state = {city:'Choose a city to view the weather'};
     this.handleClick = this.handleClick.bind(this);
-    this.handleCityChange = this.handleCityChange.bind(this);
   }
 
+  
   render() {
     return (
       <div>
@@ -33,9 +33,7 @@ export class App extends Component {
                 </div>
               </div>
             </nav>
-            <div className="container" >
-              <h1 className="display-4" onClick={this.handleCityChange} > {this.state.city} </h1>
-            </div>
+            <div className="container" > {this.state.city} </div>
             </div>
             
 
@@ -44,15 +42,20 @@ export class App extends Component {
       
     );
   }
+  
 
   handleClick(event){
     this.setState({city: event.target.textContent});
   }
 
-  handleCityChange(event){
-    this.props.fetchWeather(this.state.city);
+  componentDidUpdate(){
+
+      this.props.fetchWeather(this.state.city);
+
   }
-  
+
+
+ 
 }
 
 function mapDispatchToProps(dispatch){
