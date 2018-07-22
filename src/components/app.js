@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchWeather} from '../actions/index';
-
+import WeatherList from '../Container/weather_list';
 
 export class App extends Component {
 
@@ -16,7 +16,7 @@ export class App extends Component {
   
   render() {
     return (
-      <div>
+      <div className>
         <div className="navbar" id="navbar">
           <nav className="navbar navbar-lg navbar-light bg-blue">
               <a className="navbar-brand" href="#"><img src="/src/icons/rainbow.png" width="40" height="40" className="d-inline-block align-top" alt=""/>
@@ -33,7 +33,7 @@ export class App extends Component {
                 </div>
               </div>
             </nav>
-            <div className="container" > {this.state.city} </div>
+            <WeatherList cityName = {this.state.city} />
             </div>
             
 
