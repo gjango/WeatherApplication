@@ -6,3 +6,37 @@
 table {
     text-align: center;
 }
+
+table tbody tr td {
+    text-align: center;
+}
+
+.showdata{
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+  /* width:500px;
+  height: 100%; */
+  
+}
+
+.card {
+    background-color: #fff;
+    max-width: 500px;
+    max-height: 150px;
+    display: flex;
+    
+  flex-direction: row;
+    overflow-x: scroll;
+  }
+
+  .card--content {
+    background-color: #e74c3c;
+    max-width: 80px;
+    margin: 5px;
+    border: 3px solid black;
+  }
+
+  /* .card::-webkit-scrollbar {
+    display: none;
+  } */

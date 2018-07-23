@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchWeather} from '../actions/index';
 import WeatherList from '../Container/weather_list';
+import {fetchForecast} from '../actions/forecast';
+import ForecastList from '../Container/forecast_list';
 
 export class App extends Component {
 
@@ -16,7 +18,7 @@ export class App extends Component {
   
   render() {
     return (
-      <div className>
+      <div >
         <div className="navbar" id="navbar">
           <nav className="navbar navbar-lg navbar-light bg-blue">
               <a className="navbar-brand" href="#"><img src="/src/icons/rainbow.png" width="40" height="40" className="d-inline-block align-top" alt=""/>
@@ -33,8 +35,13 @@ export class App extends Component {
                 </div>
               </div>
             </nav>
-            <WeatherList cityName = {this.state.city} />
+            <div className="showdata">
+              <WeatherList cityName = {this.state.city} /> 
+              {/* <ForecastList cityName = {this.state.city} /> */}
+              <ForecastList  />
             </div>
+            </div>
+            
             
 
       </div>
@@ -51,6 +58,8 @@ export class App extends Component {
   componentDidUpdate(){
 
       this.props.fetchWeather(this.state.city);
+      this.props.fetchForecast(this.state.city);
+
 
   }
 
@@ -59,7 +68,7 @@ export class App extends Component {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchWeather}, dispatch);
+  return bindActionCreators({fetchWeather , fetchForecast}, dispatch);
 }
 
 export default connect(null,mapDispatchToProps)(App);
