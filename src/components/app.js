@@ -16,7 +16,13 @@ export class App extends Component {
   }
 
   
+
+  
   render() {
+
+    let cities = ['Tbilisi', 'Rustavi', 'Zugdidi', 'Kutaisi','Batumi','Gori','Poti','Mtskheta','Dusheti','Kobuleti'];
+    
+
     return (
       <div >
         <div className="navbar" id="navbar">
@@ -28,10 +34,7 @@ export class App extends Component {
               </button>
               <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div className="navbar-nav">
-                  <a className="nav-item nav-link" href="#" onClick={this.handleClick} >Tbilisi</a>
-                  <a className="nav-item nav-link" href="#" onClick={this.handleClick} >Kutaisi</a>
-                  <a className="nav-item nav-link" href="#" onClick={this.handleClick} >Batumi</a>
-                  <a className="nav-item nav-link" href="#" onClick={this.handleClick} >Zugdidi</a>
+                  {cities.map(city => <a className="nav-item nav-link" href="#" onClick={this.handleClick} key={_.random(0,999999)}>{city}</a>)}
                 </div>
               </div>
             </nav>
