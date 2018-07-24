@@ -5,6 +5,7 @@ import {fetchWeather} from '../actions/index';
 import WeatherList from '../Container/weather_list';
 import {fetchForecast} from '../actions/forecast';
 import ForecastList from '../Container/forecast_list';
+import {fetchDaily} from '../actions/daily';
 
 export class App extends Component {
 
@@ -20,7 +21,7 @@ export class App extends Component {
   
   render() {
 
-    let cities = ['Tbilisi', 'Rustavi', 'Zugdidi', 'Kutaisi','Batumi','Gori','Poti','Mtskheta','Dusheti','Kobuleti'];
+    let cities = ['Tbilisi', 'Zugdidi', 'Kutaisi','Batumi','Gori','Poti','Mtskheta','Dusheti','Kobuleti'];
     
 
     return (
@@ -62,6 +63,7 @@ export class App extends Component {
 
       this.props.fetchWeather(this.state.city);
       this.props.fetchForecast(this.state.city);
+      this.props.fetchDaily(this.state.city);
 
 
   }
@@ -71,7 +73,7 @@ export class App extends Component {
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({fetchWeather , fetchForecast}, dispatch);
+  return bindActionCreators({fetchWeather , fetchForecast, fetchDaily}, dispatch);
 }
 
 export default connect(null,mapDispatchToProps)(App);

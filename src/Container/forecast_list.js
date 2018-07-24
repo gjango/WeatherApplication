@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import _ from 'lodash';
 
 class ForecastList extends Component {
 
     renderForecast(cityData){
         const temps = cityData.list.map(weather => weather.main.temp);
+        const date = cityData.list.map(weather => weather.dt_txt);
+        console.log(date);
         console.log(temps);
-        // return (<td> {temps} </td>)
-        
         return (temps.map( temp => <div className="card--content" key={_.random(0,999999)}>{temp}</div>));
+        
     }
 
     render(){

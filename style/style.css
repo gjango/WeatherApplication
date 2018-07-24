@@ -23,10 +23,9 @@ table tbody tr td {
 .card {
     background-color: #fff;
     max-width: 500px;
-    max-height: 150px;
+    max-height: 250px;
     display: flex;
-    
-  flex-direction: row;
+   flex-direction: row;
     overflow-x: scroll;
   }
 
