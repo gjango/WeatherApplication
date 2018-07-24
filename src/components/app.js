@@ -6,6 +6,7 @@ import WeatherList from '../Container/weather_list';
 import {fetchForecast} from '../actions/forecast';
 import ForecastList from '../Container/forecast_list';
 import {fetchDaily} from '../actions/daily';
+import { NavLink } from 'react-router-dom';
 
 export class App extends Component {
 
@@ -38,13 +39,17 @@ export class App extends Component {
                   {cities.map(city => <a className="nav-item nav-link" href="#" onClick={this.handleClick} key={_.random(0,999999)}>{city}</a>)}
                 </div>
               </div>
+              
             </nav>
             <div className="showdata">
               <WeatherList cityName = {this.state.city} /> 
               {/* <ForecastList cityName = {this.state.city} /> */}
               <ForecastList  />
             </div>
+            
+            <NavLink to="/weathermap"> Map </NavLink>
             </div>
+            
             
             
 

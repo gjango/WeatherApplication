@@ -7,7 +7,8 @@ export const FETCH_DAILY = 'FETCH_DAILY';
 const ANNAS_KEY = `https://api.openweathermap.org/data/2.5/forecast/daily?q=Tbilisi%2Cge&units=metric&appid=327f0c4e1cfb6ac8bf357744e83629d7`;
 
 export function fetchDaily(city){
-    const url = `${ROOT_URL}&q=${city},ge&cnt=7`;
+    // const url = `${ROOT_URL}&q=${city},ge&cnt=7`;
+    const url = ANNAS_KEY;
     const request = axios.get(url);
 
     console.log('Request of daily forecast:', request);
