@@ -9,8 +9,6 @@ export function fetchForecast(city) {
   const url = `${ROOT_URL}&q=${city},ge&units=metric`
   const request = axios.get(url)
 
-  // console.log('Request of forecast:', request);
-
   return {
     type: FETCH_FORECAST,
     payload: request

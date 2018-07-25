@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux"
 import { fetchWeather } from "../actions/index"
 import Weather from "../Container/Weather"
 import { fetchForecast } from "../actions/forecast"
-import Forecast from "../Container/Forecast"
 import { fetchDaily } from "../actions/daily"
 import DailyList from "../Container/DailyList"
 import { NavLink } from "react-router-dom"
@@ -42,7 +41,6 @@ class MenuWrap extends Component {
 }
 
 export class App extends Component {
-  // state = { city: "Choose a city to view the weather" }
   state = {
     city: "",
     currentMenu: "slide",
@@ -94,21 +92,12 @@ export class App extends Component {
             <h1>Choose a city to view the weather</h1>
           </Empty>
         ) : (
-          <WeatherContainer>
-            <Weather cityName={this.state.city} />
-            <Forecast />
-            <DailyList />
-          </WeatherContainer>
+          <Weather cityName={this.state.city} />
         )}
       </div>
     )
   }
 }
-
-const WeatherContainer = styled.div`
-  width: 90%;
-  margin: 0 auto;
-`
 
 const Empty = styled.div`
   display: flex;

@@ -13,7 +13,6 @@ class ForecastList extends Component {
   render() {
     const forecast = this.props.forecast[0]
     if (!forecast) return null
-    // console.log("forecast: ", forecast.list)
 
     return (
       <Wrapper>

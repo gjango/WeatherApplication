@@ -11,8 +11,6 @@ export function fetchDaily(city) {
   const url = ANNAS_KEY
   const request = axios.get(url)
 
-  // console.log('Request of daily forecast:', request);
-
   return {
     type: FETCH_DAILY,
     payload: request
