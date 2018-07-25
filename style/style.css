@@ -14,7 +14,10 @@ table {
 table tbody tr td {
   text-align: center;
 }
-
+button {
+  margin-right: 100px;
+  margin-top: 50px;
+}
 /* .showdata{
   margin: 0;
   justify-content: center;

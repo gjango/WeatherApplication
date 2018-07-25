@@ -9,6 +9,7 @@ import DailyList from "../Container/DailyList"
 import { NavLink } from "react-router-dom"
 import styled, { css } from "styled-components"
 import { slide as Menu } from "react-burger-menu"
+import { cities } from "../utils/consts"
 
 class MenuWrap extends Component {
   state = {
@@ -54,27 +55,15 @@ export class App extends Component {
   }
 
   render() {
-    const cities = [
-      "Tbilisi",
-      "Zugdidi",
-      "Kutaisi",
-      "Batumi",
-      "Gori",
-      "Poti",
-      "Mtskheta",
-      "Dusheti",
-      "Kobuleti"
-    ]
-
     return (
-      <div>
+      <Wrapper>
         <MenuWrap wait={20}>
           <Menu
             id={this.state.currentMenu}
             pageWrapId={"page-wrap"}
             outerContainerId={"outer-container"}
           >
-            {cities.map(city => (
+            {cities.map(x => x.name).map(city => (
               <City
                 href="#"
                 key={`city-${city}`}
@@ -94,10 +83,20 @@ export class App extends Component {
         ) : (
           <Weather cityName={this.state.city} />
         )}
-      </div>
+        <NavLink to="/weathermap">
+          <button type="button" className="btn btn-outline-info  float-right">
+            <LocationImg src="/src/icons/location.png" />
+          </button>
+        </NavLink>
+      </Wrapper>
     )
   }
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 
 const Empty = styled.div`
   display: flex;
@@ -118,6 +117,10 @@ const City = styled.a`
     background-color: #bfad2e;
     text-decoration: none;
   }
+`
+
+const LocationImg = styled.img`
+  width: 30px;
 `
 
 function mapDispatchToProps(dispatch) {
