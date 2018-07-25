@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import _ from 'lodash';
-
 class WeatherList extends Component {
 
     renderTemp(cityData){
-        return _.round(cityData.main.temp - 273) ;
+        return (cityData.main.temp) ;
     }
 
     renderWeather(cityData){

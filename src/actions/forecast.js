@@ -7,7 +7,7 @@ const ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KE
 export const FETCH_FORECAST = 'FETCH_FORECAST';
 
 export function fetchForecast(city){
-    const url = `${ROOT_URL}&q=${city},ge`;
+    const url = `${ROOT_URL}&q=${city},ge&units=metric`;
     const request = axios.get(url);
 
     console.log('Request of forecast:', request);
