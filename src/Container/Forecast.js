@@ -5,18 +5,6 @@ import _ from "lodash"
 import styled from "styled-components"
 
 class ForecastList extends Component {
-  renderForecast(cityData) {
-    const temps = cityData.list.map(weather => weather.main.temp)
-    const date = cityData.list.map(weather => weather.dt_txt)
-    // // console.log(date)
-    // console.log(temps)
-    return temps.map(temp => (
-      <div className="card--content" key={_.random(0, 999999)}>
-        {temp}
-      </div>
-    ))
-  }
-
   getTime = timestamp =>
     moment(timestamp * 1000)
       .utc()
@@ -25,8 +13,7 @@ class ForecastList extends Component {
   render() {
     const forecast = this.props.forecast[0]
     if (!forecast) return null
-    console.log("forecast: ", forecast.list)
-    console.log("forecast: ", forecast.list[0])
+    // console.log("forecast: ", forecast.list)
 
     return (
       <Wrapper>

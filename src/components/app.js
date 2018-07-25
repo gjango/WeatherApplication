@@ -2,28 +2,54 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { fetchWeather } from "../actions/index"
-import WeatherList from "../Container/WeatherList"
+import Weather from "../Container/Weather"
 import { fetchForecast } from "../actions/forecast"
 import Forecast from "../Container/Forecast"
 import { fetchDaily } from "../actions/daily"
 import DailyList from "../Container/DailyList"
 import { NavLink } from "react-router-dom"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
+import { slide as Menu } from "react-burger-menu"
+
+class MenuWrap extends Component {
+  state = {
+    hidden: false
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const sideChanged =
+      this.props.children.props.right !== nextProps.children.props.right
+
+    if (sideChanged) {
+      this.setState({ hidden: true })
+
+      setTimeout(() => {
+        this.setState({ hidden: false })
+      }, this.props.wait)
+    }
+  }
+
+  render() {
+    let style
+    if (this.state.hidden) style = { display: "none" }
+
+    return (
+      <div style={style} className={this.props.side}>
+        {this.props.children}
+      </div>
+    )
+  }
+}
 
 export class App extends Component {
   // state = { city: "Choose a city to view the weather" }
-  state = { city: "Tbilisi" }
-
-  handleClick = e => this.setState({ city: e.target.textContent })
-
-  componentDidUpdate() {
-    this.props.fetchWeather(this.state.city)
-    this.props.fetchForecast(this.state.city)
-    this.props.fetchDaily(this.state.city)
+  state = {
+    city: "",
+    currentMenu: "slide",
+    side: "left"
   }
 
-  // remove later
-  componentDidMount() {
+  componentDidUpdate() {
     this.props.fetchWeather(this.state.city)
     this.props.fetchForecast(this.state.city)
     this.props.fetchDaily(this.state.city)
@@ -44,57 +70,65 @@ export class App extends Component {
 
     return (
       <div>
-        <div className="navbar" id="navbar">
-          <nav className="navbar navbar-lg navbar-light bg-blue">
-            <a className="navbar-brand" href="#">
-              <img
-                src="/src/icons/rainbow.png"
-                width="40"
-                height="40"
-                className="d-inline-block align-top"
-                alt=""
-              />
-              Weather
-            </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarNavAltMarkup"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div className="navbar-nav">
-                {cities.map(city => (
-                  <a
-                    className="nav-item nav-link"
-                    href="#"
-                    onClick={this.handleClick}
-                    key={`city-${city}`}
-                  >
-                    {city}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </nav>
+        <MenuWrap wait={20}>
+          <Menu
+            id={this.state.currentMenu}
+            pageWrapId={"page-wrap"}
+            outerContainerId={"outer-container"}
+          >
+            {cities.map(city => (
+              <City
+                href="#"
+                key={`city-${city}`}
+                onClick={() => this.setState({ city })}
+                selected={this.state.city === city}
+              >
+                {city}
+              </City>
+            ))}
+          </Menu>
+        </MenuWrap>
 
-          <NavLink to="/weathermap"> Map </NavLink>
-        </div>
-        <WeatherContainer>
-          <WeatherList cityName={this.state.city} />
-          {/* <ForecastList cityName = {this.state.city} /> */}
-          <Forecast />
-          <DailyList />
-        </WeatherContainer>
+        {!this.state.city ? (
+          <Empty>
+            <h1>Choose a city to view the weather</h1>
+          </Empty>
+        ) : (
+          <WeatherContainer>
+            <Weather cityName={this.state.city} />
+            <Forecast />
+            <DailyList />
+          </WeatherContainer>
+        )}
       </div>
     )
   }
 }
 
 const WeatherContainer = styled.div`
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
+`
+
+const Empty = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+`
+
+const City = styled.a`
+  cursor: pointer;
+  ${props =>
+    props.selected &&
+    css`
+      background-color: #bfad2e;
+    `};
+
+  :hover {
+    background-color: #bfad2e;
+    text-decoration: none;
+  }
 `
 
 function mapDispatchToProps(dispatch) {
