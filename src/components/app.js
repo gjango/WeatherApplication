@@ -4,17 +4,26 @@ import { bindActionCreators } from "redux"
 import { fetchWeather } from "../actions/index"
 import WeatherList from "../Container/WeatherList"
 import { fetchForecast } from "../actions/forecast"
-import ForecastList from "../Container/ForecastList"
+import Forecast from "../Container/Forecast"
 import { fetchDaily } from "../actions/daily"
 import DailyList from "../Container/DailyList"
 import { NavLink } from "react-router-dom"
+import styled from "styled-components"
 
 export class App extends Component {
-  state = { city: "Choose a city to view the weather" }
+  // state = { city: "Choose a city to view the weather" }
+  state = { city: "Tbilisi" }
 
-  handleClick = event => this.setState({ city: event.target.textContent })
+  handleClick = e => this.setState({ city: e.target.textContent })
 
   componentDidUpdate() {
+    this.props.fetchWeather(this.state.city)
+    this.props.fetchForecast(this.state.city)
+    this.props.fetchDaily(this.state.city)
+  }
+
+  // remove later
+  componentDidMount() {
     this.props.fetchWeather(this.state.city)
     this.props.fetchForecast(this.state.city)
     this.props.fetchDaily(this.state.city)
@@ -62,7 +71,7 @@ export class App extends Component {
                     className="nav-item nav-link"
                     href="#"
                     onClick={this.handleClick}
-                    key={_.random(0, 999999)}
+                    key={`city-${city}`}
                   >
                     {city}
                   </a>
@@ -70,19 +79,23 @@ export class App extends Component {
               </div>
             </div>
           </nav>
-          <div className="showdata">
-            <WeatherList cityName={this.state.city} />
-            {/* <ForecastList cityName = {this.state.city} /> */}
-            <ForecastList />
-            <DailyList />
-          </div>
 
           <NavLink to="/weathermap"> Map </NavLink>
         </div>
+        <WeatherContainer>
+          <WeatherList cityName={this.state.city} />
+          {/* <ForecastList cityName = {this.state.city} /> */}
+          <Forecast />
+          <DailyList />
+        </WeatherContainer>
       </div>
     )
   }
 }
+
+const WeatherContainer = styled.div`
+  width: 100%;
+`
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
