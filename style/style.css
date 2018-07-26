@@ -1,6 +1,7 @@
 body {
   background-color: #1b417c;
   color: #fff;
+  font-family: 'Merienda', cursive;
 }
 
 .nav-item {
@@ -74,7 +75,7 @@ button {
 .bm-menu {
   background: #373a47;
   padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
+  font-size: 1.5em;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -91,9 +92,36 @@ button {
 /* Individual item */
 .bm-item {
   display: inline-block;
+  color : #FFF;
+  margin-bottom: 15px;
 }
 
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+#rotate{
+  position: absolute;
+  top: 15px;
+  left: 22px;
+  -webkit-animation: rotation 2s infinite linear;
+}
+
+
+#rotate1{
+  position: absolute;
+  right:23px;
+  bottom: 35px;
+  -webkit-animation: rotation 2s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+  from {
+      -webkit-transform: rotate(0deg);
+  }
+  to {
+      -webkit-transform: rotate(359deg);
+  }
+  
 }

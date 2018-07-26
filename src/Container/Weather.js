@@ -27,6 +27,13 @@ class WeatherList extends Component {
         <Separator />
         <WindContainer>
           Wind
+          
+          <WindAnimation>
+            <img src="/src/icons/windicons/wind-base.png" />
+            <img id="rotate" src="/src/icons/windicons/wind-top1.png" />
+            <img id="rotate1" src="/src/icons/windicons/wind-top2.png" />
+          </WindAnimation>
+
           <WindDetails>
             direction: {mainWeather.wind.deg}°
             <br />
@@ -76,6 +83,10 @@ const WindContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`
+
+const WindAnimation = styled.div`
+  position: relative;
 `
 
 const WindDetails = styled.div`
