@@ -7,7 +7,6 @@ import styled from "styled-components"
 class ForecastList extends Component {
   getTime = timestamp =>
     moment(timestamp * 1000)
-      .utc()
       .format("HH:mm")
 
   render() {

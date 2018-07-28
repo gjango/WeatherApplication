@@ -4,6 +4,7 @@ import Forecast from "../Container/Forecast"
 import moment from "moment"
 import styled from "styled-components"
 import Daily from "./DailyList"
+import CircularProgressbar from 'react-circular-progressbar';
 
 class WeatherList extends Component {
   getTime = timestamp => moment(timestamp * 1000).format("HH:mm")
@@ -12,6 +13,7 @@ class WeatherList extends Component {
     const mainWeather = this.props.weather[0]
     if (!mainWeather) return null
     const weather = mainWeather.weather[0]
+    console.log(mainWeather);
 
     return (
       <Container>
@@ -40,6 +42,19 @@ class WeatherList extends Component {
             speed: {mainWeather.wind.speed} km/h
           </WindDetails>
         </WindContainer>
+
+        <Separator />
+
+        <HumidityContainer>
+          <div>
+            Comfort LVL
+          </div>
+          <div>
+            <CircularProgressbar percentage={mainWeather.main.humidity} text={`${mainWeather.main.humidity}%`} /> humidity
+          </div>
+          <div>Feels like</div>
+
+        </HumidityContainer>
 
         <Separator />
         <DailyContainer>
@@ -85,12 +100,19 @@ const WindContainer = styled.div`
   justify-content: space-between;
 `
 
+const HumidityContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
 const WindAnimation = styled.div`
   position: relative;
+  margin-left: 120px;
 `
 
 const WindDetails = styled.div`
-  margin-right: 100px;
+  
 `
 
 const DailyContainer = styled.div`
